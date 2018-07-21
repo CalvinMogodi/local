@@ -44,9 +44,11 @@
           <ul class="nav navbar-nav">
             <li [ngClass]="{'active':activeMenuTab == 0}"><a href="#/" class="act">Home</a></li>
             <li [ngClass]="{'active':activeMenuTab == 1}" *ngIf="showlogout"><a href="#/store" class="act" (click)="NavigateTo('store')">My Store</a></li>
+            <li [ngClass]="{'active':activeMenuTab == 3}" *ngIf="showlogout"><a href="#/order" class="act" (click)="NavigateTo('order')">Orders</a></li>
+            <li [ngClass]="{'active':activeMenuTab == 4}" *ngIf="showlogout"><a href="#/courier" class="act" (click)="NavigateTo('courier')">Courier</a></li>
             <!-- Mega Menu -->
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories <b class="caret"></b></a>
+              <a href="#" [ngStyle]="{'color':activeMenuTab == 2 ? '#d8703f' : '#777'}" class="dropdown-toggle" data-toggle="dropdown">Categories <b class="caret"></b></a>
               <ul class="dropdown-menu multi-column columns-3" style="margin-left: -402px !important; min-width: 1200px !important;">
                 <div class="row">
                   <div class="col-sm-2">
@@ -204,32 +206,13 @@
         </div>
       </nav>
     </div>
-    <div class="logo-nav-right">
-      <div class="search-box">
-        <div id="sb-search" class="sb-search">
-          <form>
-            <input class="sb-search-input" placeholder="Enter your search term..." type="search" id="search">
-            <input class="sb-search-submit" type="submit" value="">
-            <span class="sb-icon-search"> </span>
-          </form>
-        </div>
-      </div>
-      <!-- search-scripts -->
-      <script src="../assets/js/classie.js"></script>
-      <script src="../assets/js/uisearch.js"></script>
-      <script>
-        new UISearch(document.getElementById('sb-search'));
-      </script>
-      <!-- //search-scripts -->
-    </div>
-    <div class="header-right">
+    <div class="header-right" style="width: 30% !important">
       <div class="cart box_1" (click)="NavigateTo('checkout')">
-          <h3>
-            <div class="total">
-              <span>R 0.00</span> (<span class="simpleCart_quantity"></span> items)</div>
+          <h3 style="cursor: pointer">
+            <div class="total" style="margin: 15px !important">
+              <span>{{cartTotalPrice | currency:'R '}}</span> (<span> {{cartList.length}}</span> items)</div>
             <img src="../assets/images/bag.png" alt="" />
           </h3>
-        <p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
         <div class="clearfix"> </div>
       </div>
     </div>

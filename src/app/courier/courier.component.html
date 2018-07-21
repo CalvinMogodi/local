@@ -1,0 +1,12 @@
+<div class="container">
+  <form [formGroup]="registerForm" class="animated wow slideInUp" data-wow-delay=".5s">
+    <div>
+      <label class="mylabel">Order Number: </label>
+      <input type="text" [value]="user.name" formControlName="name" (input)="user.name = $event.target.value"
+        name="name" required="required">
+        <div *ngIf="!registerForm.controls.name.valid && (registerForm.controls.name.dirty || submitAttempt)">
+          <small class="red">The field above is required.</small>
+        </div>
+    </div>
+  </form>
+</div>

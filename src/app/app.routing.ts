@@ -8,13 +8,17 @@ import { ProductComponent } from './product/product.component';
 import { StoreComponent } from './store/store.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { SingleComponent } from './single/single.component';
+import { OrderComponent } from './order/order.component';
+import { CourierComponent } from './courier/courier.component';
 
 const routes: Routes =[
     { path: 'home', component: HomeComponent },  
     { path: 'product', component: ProductComponent },  
     { path: 'store', component: StoreComponent }, 
     { path: 'checkout', component: CheckoutComponent }, 
-    { path: 'single', component: SingleComponent },      
+    { path: 'single', component: SingleComponent },     
+    { path: 'order', component: OrderComponent },  
+    { path: 'courier', component: CourierComponent },   
     { path: '',redirectTo: 'home', pathMatch: 'full' }
 ];
 

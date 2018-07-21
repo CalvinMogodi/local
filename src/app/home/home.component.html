@@ -58,7 +58,7 @@
 						<p data-toggle="tooltip" data-placement="top" title="{{ product.Description }}" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 230px;">{{product.Description}}</p>
 						<div class="new-collections-grid1-left simpleCart_shelfItem">
 							<p><i>R {{product.Price}}</i> <span class="item_price">R {{product.Discount}} </span></p>
-							<p style="float: right"><a class="item_add" href="#" style="font-size: 10px !important;">add to cart </a></p>
+							<p style="float: right"><button type="button" (click)="addProductToCart(product)" class="add-to-cart">add to cart</button></p>
 						</div>
 						</div>
 					</div>
@@ -114,7 +114,7 @@
 					<br>            
             </div>
         </div>
-        <div class="col-md-7 single-right-left simpleCart_shelfItem animated slideInRight" data-wow-delay=".5s">
+        <div class="	 single-right-left simpleCart_shelfItem animated slideInRight" data-wow-delay=".5s">
             <h3>{{productToView.Name}}</h3>
             <h4 *ngIf="!productToView.IsOnSpecial"><span class="item_price">R {{productToView.Price}}</span></h4>
             <div class="new-collections-grid1-left simpleCart_shelfItem" *ngIf="productToView.IsOnSpecial">
@@ -138,32 +138,15 @@
                 <h5><i>Description</i></h5>
                 <p>{{productToView.Description}}</p>
             </div>
-           <div class="color-quality">
+           <div class="color-quality" *ngIf="sizes.length > 0">
                 <div class="color-quality-left">
+                    <h5>Sizes : </h5>
+                    <ul>
+                        <li *ngFor='let thisSize of sizes; let i = index'>{{thisSize}}</li>
+                    </ul>
                 </div>
-                <div class="color-quality-right">
-                    <h5>Quality :</h5>
-                    <select id="country1" onchange="change_country(this.value)" class="frm-field required sect">
-								<option value="1">1 Qty</option>
-								<option value="2">2 Qty</option> 
-								<option value="3">3 Qty</option>	
-								<option value="4">4 Qty</option>				
-								<option value="5">5 Qty</option>		
-								<option value="6">6 Qty</option>
-								<option value="7">7 Qty</option>
-								<option value="8">8 Qty</option>
-								<option value="9">9 Qty</option>
-								<option value="10">10 Qty</option>	
-								<option value="11">11 Qty</option>
-								<option value="12">12 Qty</option>
-								<option value="13">13 Qty</option>
-								<option value="14">14 Qty</option>	
-								<option value="15">15 Qty</option>				
-							</select>
-                </div>
-                <div class="clearfix"> </div>
             </div>
-            <div class="color-quality">
+            <div class="color-quality" *ngIf="colors.length > 0">
                 <div class="color-quality-left">
                     <h5>Color : </h5>
                     <ul>
@@ -173,7 +156,7 @@
             </div>
 			<br><br>
             <div class="occasion-cart" style="margin-top: 70px !important;">
-                <a class="item_add" href="#">add to cart </a>
+                <a class="item_add" href="#" >add to cart </a>				
             </div>
             <div class="social">
                 <div class="social-left">

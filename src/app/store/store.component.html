@@ -211,21 +211,26 @@
                     </div>
                     <div>
                         <label class="mylabel">Category: </label>
-                        <ng-multiselect-dropdown class="my-select" formControlName="category" [data]="categorydropdownList" [(ngModel)]="category"
-                            [settings]="categorydropdownSettings" (onSelect)="oncategoryItemSelect($event)">
-                            </ng-multiselect-dropdown>
-                            <div *ngIf="!productForm.controls.category.valid && (productForm.controls.category.dirty || submitProductAttempt)">
-                                <small class="red">The field above is required.</small>
-                            </div>
+                        <ng-multiselect-dropdown class="my-select" formControlName="category" [data]="productCategoryList" [(ngModel)]="category" [settings]="productCategorySettings"></ng-multiselect-dropdown>
+                        <div *ngIf="!productForm.controls.category.valid && (productForm.controls.category.dirty || submitProductAttempt)">
+                            <small class="red">The field above is required.</small>
+                        </div>
                     </div>
+                        <div>
+                            <label class="mylabel">Size Category: </label>
+                            <ng-multiselect-dropdown class="my-select" formControlName="sizeCategory" [data]="sizeCategoryList" [(ngModel)]="sizeCategory" [settings]="sizeCategorySettings" (onSelect)="onSizeCategoryItemSelect($event)"></ng-multiselect-dropdown>
+                        </div>
+                        <div> 
+                            <label class="mylabel">Size: </label>
+                        <ng-multiselect-dropdown class="my-select" formControlName="sizes" [data]="sizeList" [(ngModel)]="sizes" [settings]="sizesSettings">
+                            </ng-multiselect-dropdown>
+                        </div>
                     <div>
                         <label class="mylabel">Available Colors: </label>
-                        <ng-multiselect-dropdown class="my-select" formControlName="colors" [data]="dropdownList" [(ngModel)]="colors" [settings]="dropdownSettings"
-                            (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
-                            </ng-multiselect-dropdown>
-                            <div *ngIf="!productForm.controls.colors.valid && (productForm.controls.colors.dirty || submitProductAttempt)">
-                                <small class="red">The field above is required.</small>
-                            </div>
+                        <ng-multiselect-dropdown class="my-select" formControlName="colors" [data]="colorList" [(ngModel)]="colors" [settings]="colorSettings"></ng-multiselect-dropdown>
+                        <div *ngIf="!productForm.controls.colors.valid && (productForm.controls.colors.dirty || submitProductAttempt)">
+                            <small class="red">The field above is required.</small>
+                        </div>
                     </div>
                     <div>
                         <div class="check">

@@ -25,6 +25,9 @@ import { SingleComponent } from './single/single.component';
 import { UserProvider } from './providers/user';
 import { StoreProvider } from './providers/store';
 import { ProductProvider } from './providers/product';
+import { OrderProvider } from './providers/order';
+import { CourierComponent } from './courier/courier.component';
+import { OrderComponent } from './order/order.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,9 @@ import { ProductProvider } from './providers/product';
     ProductComponent,
     StoreComponent,
     CheckoutComponent,
-    SingleComponent
+    SingleComponent,
+    CourierComponent,
+    OrderComponent
   ],
   imports: [
     BrowserModule,
@@ -54,6 +59,7 @@ import { ProductProvider } from './providers/product';
     CommonService,
     UserProvider,
     StoreProvider,
+    OrderProvider,
     ProductProvider,
     HttpClient,
     { provide: LocationStrategy, useClass: HashLocationStrategy },],
