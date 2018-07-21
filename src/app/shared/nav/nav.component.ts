@@ -42,6 +42,7 @@ export class NavComponent implements OnInit {
 
   Navigate(gategory, product) {
     this.commonService.assginProductSearch({ gategory: gategory, product: product, });
+     sessionStorage.setItem('searchedProduct', JSON.stringify({ gategory: gategory, product: product, }));
     this.router.navigate(['/product']);
   }
   NavigateTo(url) {

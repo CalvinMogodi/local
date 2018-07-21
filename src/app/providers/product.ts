@@ -12,4 +12,8 @@ export class ProductProvider {
     getSpecialDeals() {
         return this.http.get(this.url + "/getSpecialDeals");
     }
+
+    getProductsByCategory(parameters) {
+        return this.http.post(this.url + "/getProductsByCategory", parameters);
+    }
 }

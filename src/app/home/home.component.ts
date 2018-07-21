@@ -9,6 +9,7 @@ import { ProductProvider } from '../providers/product';
 export class HomeComponent {
   title = 'app';
   public products = [];
+  public selectedImage = '';
   public productToView = {
     Name: '',
     Description: '',
@@ -16,10 +17,14 @@ export class HomeComponent {
     IsOnSpecial: 'false',
     Discount: '',
     ImageName: '',
+    ImageName1: '',
+    ImageName2: '',
+    ImageName3: '',
     StoreId: 0,
     CreatedDate: '',
     Id: 0,
   };
+  public colors = [];
   public serverImgurl = "http://localhost:7777/";
   public currentUser: any;
   constructor(public productProvider: ProductProvider) {
@@ -38,7 +43,12 @@ export class HomeComponent {
 
   setProductToView(product) {
     this.productToView = product;
-    //sessionStorage.setItem('productToView', JSON.stringify(product));
+    this.selectedImage = this.serverImgurl + this.productToView.ImageName;
+    this.colors = product.Colors.split(",");
+  }
+
+  setSelectedImage(imageName){
+    this.selectedImage = this.serverImgurl + imageName;
   }
 }
 

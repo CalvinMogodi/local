@@ -92,23 +92,23 @@
           <span aria-hidden="true">&times;</span>
         </button>
 		<br><br>
-    <div class="col-md-8 single-right">
+    <div class="col-md-12 single-right">
         <div class="col-md-5 single-right-left animated slideInUp" data-wow-delay=".5s">
             <div>
-				<img src="{{serverImgurl+productToView.ImageName}}" data-imagezoom="true" class="img-responsive">
+				<img src="{{selectedImage}}" data-imagezoom="true" class="img-responsive">
 				<br>
 				<div class="row">
-					<div class="col-sm-2" style="width: 30%; height: 60%">
-						<img src="{{serverImgurl+productToView.ImageName}}" class="img-responsive">
+					<div class="col-sm-2" style="width: 20%;height: 40%;">
+						<img src="{{serverImgurl+productToView.ImageName}}" class="img-responsive" (click)="setSelectedImage(productToView.ImageName)">
 					</div>
-					<div class="col-sm-2" style="width: 30%; height: 60%;margin-left: -21px;">
-						<img src="{{serverImgurl+productToView.ImageName}}" class="img-responsive">
+					<div *ngIf="productToView.ImageName1 != null" class="col-sm-2" style="width: 20%;height: 40%;margin-left: -21px;">
+						<img src="{{serverImgurl+productToView.ImageName1}}" class="img-responsive" (click)="setSelectedImage(productToView.ImageName1)">
 					</div>
-					<div class="col-sm-2" style="width: 30%; height: 60%;margin-left: -21px;">
-						<img src="{{serverImgurl+productToView.ImageName}}" class="img-responsive">
+					<div *ngIf="productToView.ImageName2 != null" class="col-sm-2" style="width: 20%;height: 40%;margin-left: -21px;">
+						<img src="{{serverImgurl+productToView.ImageName2}}" class="img-responsive" (click)="setSelectedImage(productToView.ImageName2)">
 					</div>
-					<div class="col-sm-2" style="width: 30%; height: 60%;margin-left: -21px; float: right">
-						<img src="{{serverImgurl+productToView.ImageName}}" class="img-responsive">
+					<div *ngIf="productToView.ImageName3 != null" class="col-sm-2" style="width: 20%;height: 40%;margin-left: -21px">
+						<img src="{{serverImgurl+productToView.ImageName3}}" class="img-responsive" (click)="setSelectedImage(productToView.ImageName3)">
 					</div>
 				</div>    
 					<br>            
@@ -138,15 +138,8 @@
                 <h5><i>Description</i></h5>
                 <p>{{productToView.Description}}</p>
             </div>
-            <div class="color-quality">
+           <div class="color-quality">
                 <div class="color-quality-left">
-                    <h5>Color : </h5>
-                    <ul>
-                        <li><a href="#"><span></span>Red</a></li>
-                        <li><a href="#" class="brown"><span></span>Yellow</a></li>
-                        <li><a href="#" class="purple"><span></span>Purple</a></li>
-                        <li><a href="#" class="gray"><span></span>Violet</a></li>
-                    </ul>
                 </div>
                 <div class="color-quality-right">
                     <h5>Quality :</h5>
@@ -170,8 +163,16 @@
                 </div>
                 <div class="clearfix"> </div>
             </div>
-			<br>
-            <div class="occasion-cart">
+            <div class="color-quality">
+                <div class="color-quality-left">
+                    <h5>Color : </h5>
+                    <ul>
+                        <li *ngFor='let thiscolor of colors; let i = index'><a href="#" ><span [ngStyle]="{'background-color':thiscolor}"></span>{{thiscolor}}</a></li>
+                    </ul>
+                </div>
+            </div>
+			<br><br>
+            <div class="occasion-cart" style="margin-top: 70px !important;">
                 <a class="item_add" href="#">add to cart </a>
             </div>
             <div class="social">
