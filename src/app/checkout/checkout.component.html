@@ -1,136 +1,116 @@
 <div class="checkout">
-		<div class="container">
-			<h3 class="animated wow slideInLeft" data-wow-delay=".5s">Your shopping cart contains: <span>3 Products</span></h3>
-			<div class="checkout-right animated wow slideInUp" data-wow-delay=".5s">
-				<table class="timetable_sub">
-					<thead>
-						<tr>
-							<th>SL No.</th>	
-							<th>Product</th>
-							<th>Quality</th>
-							<th>Product Name</th>
-							<th>Service Charges</th>
-							<th>Price</th>
-							<th>Remove</th>
-						</tr>
-					</thead>
-					<tr class="rem1">
-						<td class="invert">1</td>
-						<td class="invert-image"><a href="single.html"><img src="images/22.jpg" alt=" " class="img-responsive" /></a></td>
-						<td class="invert">
-							 <div class="quantity"> 
-								<div class="quantity-select">                           
-									<div class="entry value-minus">&nbsp;</div>
-									<div class="entry value"><span>1</span></div>
-									<div class="entry value-plus active">&nbsp;</div>
-								</div>
-							</div>
-						</td>
-						<td class="invert">Black Shoe</td>
-						<td class="invert">$5.00</td>
-						<td class="invert">$290.00</td>
-						<td class="invert">
-							<div class="rem">
-								<div class="close1"> </div>
-							</div>
-							<script>$(document).ready(function(c) {
-								$('.close1').on('click', function(c){
-									$('.rem1').fadeOut('slow', function(c){
-										$('.rem1').remove();
-									});
-									});	  
-								});
-						   </script>
-						</td>
+	<div class="container">
+		<h3 class="animated wow slideInLeft" data-wow-delay=".5s">Your shopping cart contains: <span>3 Products</span></h3>
+		<div class="checkout-right animated wow slideInUp" data-wow-delay=".5s">
+			<table class="timetable_sub">
+				<thead>
+					<tr>
+						<th>Product</th>
+						<th>Product Name</th>
+						<th>Size</th>
+						<th>Quality</th>
+						<th>Price</th>
+						<th>Remove</th>
 					</tr>
-					<tr class="rem2">
-						<td class="invert">2</td>
-						<td class="invert-image"><a href="single.html"><img src="images/30.jpg" alt=" " class="img-responsive" /></a></td>
-						<td class="invert">
-							 <div class="quantity"> 
-								<div class="quantity-select">                           
-									<div class="entry value-minus">&nbsp;</div>
-									<div class="entry value"><span>1</span></div>
-									<div class="entry value-plus active">&nbsp;</div>
-								</div>
-							</div>
-						</td>
-						<td class="invert">Centre Table</td>
-						<td class="invert">$5.00</td>
-						<td class="invert">$250.00</td>
-						<td class="invert">
-							<div class="rem">
-								<div class="close2"> </div>
-							</div>
-							<script>$(document).ready(function(c) {
-								$('.close2').on('click', function(c){
-									$('.rem2').fadeOut('slow', function(c){
-										$('.rem2').remove();
-									});
-									});	  
-								});
-						   </script>
-						</td>
-					</tr>
-					<tr class="rem3">
-						<td class="invert">3</td>
-						<td class="invert-image"><a href="single.html"><img src="images/11.jpg" alt=" " class="img-responsive" /></a></td>
-						<td class="invert">
-							 <div class="quantity"> 
-								<div class="quantity-select">                           
-									<div class="entry value-minus">&nbsp;</div>
-									<div class="entry value"><span>1</span></div>
-									<div class="entry value-plus active">&nbsp;</div>
-								</div>
-							</div>
-						</td>
-						<td class="invert">Stone Bangles</td>
-						<td class="invert">$5.00</td>
-						<td class="invert">$299.00</td>
-						<td class="invert">
-							<div class="rem">
-								<div class="close3"> </div>
-							</div>
-							<script>$(document).ready(function(c) {
-								$('.close3').on('click', function(c){
-									$('.rem3').fadeOut('slow', function(c){
-										$('.rem3').remove();
-									});
-									});	  
-								});
-						   </script>
-						</td>
-					</tr>
-								<!--quantity-->
-									<script>
-									$('.value-plus').on('click', function(){
-										var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)+1;
-										divUpd.text(newVal);
-									});
+				</thead>
+				<tr class="rem1" *ngFor='let product of cartList; let i = index'>
+					<td class="invert-image" style="text-align: center"><img style="height: auto;" src="{{serverImgurl+product.ImageName}}" alt=" " height="60px" width="30px" /></td>
+					<td class="invert">{{product.Name}}</td>
+					<td class="invert" style="text-align: center">
 
-									$('.value-minus').on('click', function(){
-										var divUpd = $(this).parent().find('.value'), newVal = parseInt(divUpd.text(), 10)-1;
-										if(newVal>=1) divUpd.text(newVal);
-									});
-									</script>
-								<!--quantity-->
-				</table>
+					</td>
+					<td class="invert" style="text-align: center">
+						<input type="number" style="width: 100px !important;color: #999;padding: 10px 10px 10px 10px; border: 1px solid #DBDBDB;"
+							[value]="product.quantity" (input)="product.quantity = $event.target.value" name="quantity">
+							<div *ngIf="product.quantityError"> <small class="red">Quantity must be greater than zero.</small> </div>
+					</td>
+					<td class="invert" style="text-align: right" *ngIf="product.IsOnSpecial == '1'">{{ product.Discount | currency:'R '}}</td>
+					<td class="invert" style="text-align: right" *ngIf="product.IsOnSpecial == '0'">{{ product.Price | currency:'R '}}</td>
+					<td class="invert">
+						<div class="rem" style="text-align: center" (click)="removeProductFromBasket(product, i)">
+							<div class="close1" style="right: 70px !important;"> </div>
+						</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<div class="checkout-left">
+			<div class="checkout-left-basket animated wow slideInLeft" style="float: right !important" data-wow-delay=".5s">
+				<ul>
+					<li *ngFor='let product of cartList; let i = index'> {{ product.Name }}
+						<span *ngIf="product.IsOnSpecial == '1'"> {{ product.Discount | currency:'R '}}</span>
+						<span *ngIf="product.IsOnSpecial == '0'"> {{ product.Price | currency:'R '}} </span>
+					</li>
+					<li>Total <span> {{ cartTotalPrice | currency:'R '}}</span></li>
+				</ul>
+				<h4 data-toggle="modal" data-target="#paymentModal" style="cursor: pointer;" (click)="processed()">Processed</h4>
 			</div>
-			<div class="checkout-left">	
-				<div class="checkout-left-basket animated wow slideInLeft" data-wow-delay=".5s">
-					<h4>Continue to basket</h4>
-					<ul>
-						<li>Product1 <i>-</i> <span>$250.00 </span></li>
-						<li>Product2 <i>-</i> <span>$290.00 </span></li>
-						<li>Product3 <i>-</i> <span>$299.00 </span></li>
-						<li>Total Service Charges <i>-</i> <span>$15.00</span></li>
-						<li>Total <i>-</i> <span>$854.00</span></li>
-					</ul>
-				</div>
-				<div class="checkout-right-basket animated wow slideInRight" data-wow-delay=".5s">
-					<a href="single.html"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>Continue Shopping</a>
-				</div>
-				<div class="clearfix"> </div>
+			<div style="float: left !important; margin-top: 0px !important" class="checkout-right-basket animated wow slideInRight" data-wow-delay=".5s">
+				<label (click)="continueShopping()"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>Continue Shopping</label>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+	</div>
+</div>
+
+<!-- Payment Modal -->
+<div class="modal fade" id="paymentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h3 class="modal-title" id="exampleModalLabel">Payment</h3>
+				<button type="button" class="close" data-dismiss="modal" style="font-size: 30px; margin-right: -10px !important;margin-top: -30px;"
+					id="closeModal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+					</button>
+			</div>
+			<div class="modal-body">
+				<form>
+					<div class="row">
+						<label class="col-md-2">Brand</label>
+						<div class="col-md-8">
+							<select name="paymentBrand" class="my-number-input">
+                    				<option value="MASTER">Mastercard</option>
+                    				<option value="VISA">Visa</option>
+                				</select>
+						</div>
+						<div class="col-md-2" style="float: right">
+							<img style="height: auto;" src="../assets/images/visa.jpg" alt=" " height="60px" width="30px" />
+							<img style="height: auto;" src="../assets/images/mastercard.jpg" alt=" " height="60px" width="30px" />
+
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<label>Card Number</label>
+							<input type="number" autocomplete="off" name="card.number" class="my-number-input" placeholder="Card Number">
+						</div>
+						<div class="col-md-6">
+							<label>Expiry Date</label>
+							<input type="date" autocomplete="off" name="card.expiry" b class="my-number-input" placeholder="MM / YY">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<label>Card holder</label>
+							<input type="text" autocomplete="off" name="card.holder" class="my-number-input" placeholder="Card holder">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<label>CVV</label>
+							<input type="number" style="width: 70px" min="0" max="1000" autocomplete="off" name="card.cvv" class="my-number-input" placeholder="CVV">
+						</div>
+					</div>
+					<input type="hidden" name="shopperResultUrl" value="https://test.oppwa.com/v1/checkouts/{checkoutId}/payment">
+					<input type="hidden" name="card.expiryMonth" value="">
+					<input type="hidden" name="card.expiryYear" value="">
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+				<button type="submit" class="btn btn-primary" data-dismiss="modal" (click)="payNow()">Pay now</button>
 			</div>
 		</div>
 	</div>
+</div>

@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
+declare var require: any
 @Injectable()
 export class OrderProvider {
     public url: string = "http://localhost:7777/api";
@@ -24,4 +25,17 @@ export class OrderProvider {
     getOrdersByStoreId(parameters) {
         return this.http.post(this.url + "/getOrdersByStoreId", parameters);
     }
+
+    startPayment(parameters) {
+        return this.http.post(this.url + "/startPayment", parameters);
+    }
+
+    makePaymet(parameters) {
+        return this.http.post(this.url + "/makePaymet", parameters);
+    }
+
+    getPaymentStatus(parameters) {
+        return this.http.post(this.url + "/getPaymentStatus", parameters);
+    }
+
 }
