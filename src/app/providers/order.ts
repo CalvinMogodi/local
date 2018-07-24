@@ -26,6 +26,15 @@ export class OrderProvider {
         return this.http.post(this.url + "/getOrdersByStoreId", parameters);
     }
 
+    addOrderProduct(parameters) {
+        return this.http.post(this.url + "/insertOrderProduct", parameters);
+    }
+
+    addOrderAudit(parameters) {
+        return this.http.post(this.url + "/addOrderAudit", parameters);
+    }
+
+    //Payment
     startPayment(parameters) {
         return this.http.post(this.url + "/startPayment", parameters);
     }

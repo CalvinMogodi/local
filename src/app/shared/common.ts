@@ -7,6 +7,13 @@ export class CommonService {
     // Objects
     public user: any;
     public productSearch: any;    
+    public payment = {
+        cardcvv: '',
+        cardHolder: '',
+        cardExpiry: '',
+        cardNumber: '',
+        brand: '',
+    };
     public product = {
         name: '',
         description: '',
@@ -63,6 +70,7 @@ export class CommonService {
         index: -1
     }
      public orderAudit = {
+        Id: 0,
         penddingPayment:false,
         penddingPaymentDate: new Date(),
         paymentComplete:false,
@@ -76,10 +84,11 @@ export class CommonService {
         withCourier:false,
         withCourierDate: new Date(),
         complete:false,
-        completeDate: new Date(),
+        completeDate: new Date(),       
     };
 
     public orderProduct:{
+        id:0,
         productId : 0
         product: any,
         orderid: 0,
@@ -103,9 +112,11 @@ export class CommonService {
         supplierContactDeatils:'',
         userContactDeatils:'',
         orderAudit: this.orderAudit,
+        auditId: 0,
         wayBill:'',
         courierName: '',
-        courierId:''        
+        courierId:'',
+        transactionId: ''        
     };  
 
     // Settings

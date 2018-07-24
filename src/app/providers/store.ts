@@ -51,4 +51,8 @@ export class StoreProvider {
     getProductsStoreById(parameters) {
         return this.http.post(this.url + "/getProductsStoreById", parameters);
     }
+
+    getStoreById(parameters) {
+        return this.http.post(this.url + "/getStoreById", parameters);
+    }
 }
