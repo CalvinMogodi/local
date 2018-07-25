@@ -76,6 +76,10 @@ export class NavComponent implements OnInit {
           this.activeMenuTab = 5;
           break;
         }
+        case "/admin": {
+          this.activeMenuTab = 6;
+          break;
+        }
       }
     });
   }

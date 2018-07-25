@@ -1,0 +1,17 @@
+.red{
+    color: red;
+}
+
+.reject{
+    font-weight: bold;
+    background-color: #d69130;
+    border-style: solid;
+    border-width: 2px;
+}
+
+.approve{
+    font-weight: bold;
+    background-color: #337633;
+    border-style: solid;
+    border-width: 2px;
+}

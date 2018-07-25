@@ -30,6 +30,8 @@ export class CommonService {
         storeId: 0,
         createdDate: '',
         id: 0,
+        rejectReason: null,
+        isActive: null
     };
     public store = {
         name: '',

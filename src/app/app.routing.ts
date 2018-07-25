@@ -10,6 +10,8 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { SingleComponent } from './single/single.component';
 import { OrderComponent } from './order/order.component';
 import { CourierComponent } from './courier/courier.component';
+import { AdminComponent } from './admin/admin.component';
+
 
 const routes: Routes =[
     { path: 'home', component: HomeComponent },  
@@ -19,6 +21,7 @@ const routes: Routes =[
     { path: 'single', component: SingleComponent },     
     { path: 'order', component: OrderComponent },  
     { path: 'courier', component: CourierComponent },   
+    { path: 'admin', component: AdminComponent },
     { path: '',redirectTo: 'home', pathMatch: 'full' }
 ];
 

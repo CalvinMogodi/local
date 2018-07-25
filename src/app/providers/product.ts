@@ -16,4 +16,8 @@ export class ProductProvider {
     getProductsByCategory(parameters) {
         return this.http.post(this.url + "/getProductsByCategory", parameters);
     }
+
+    getProductToApprove() {
+        return this.http.get(this.url + "/getProductToApprove");
+    }
 }

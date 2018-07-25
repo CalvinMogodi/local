@@ -34,6 +34,10 @@ export class OrderProvider {
         return this.http.post(this.url + "/addOrderAudit", parameters);
     }
 
+    setProductActive(parameters) {
+        return this.http.post(this.url + "/setProductActive", parameters);
+    }
+
     //Payment
     startPayment(parameters) {
         return this.http.post(this.url + "/startPayment", parameters);

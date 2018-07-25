@@ -28,6 +28,7 @@ import { ProductProvider } from './providers/product';
 import { OrderProvider } from './providers/order';
 import { CourierComponent } from './courier/courier.component';
 import { OrderComponent } from './order/order.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +43,8 @@ import { OrderComponent } from './order/order.component';
     CheckoutComponent,
     SingleComponent,
     CourierComponent,
-    OrderComponent
+    OrderComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
