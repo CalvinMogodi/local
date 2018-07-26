@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 export class CommonService {
     itemValue = new Subject();
     // Objects
+    public serverImgurl = "http://localhost:7777/";
     public user: any;
     public productSearch: any;    
     public payment = {
@@ -13,6 +14,16 @@ export class CommonService {
         cardExpiry: '',
         cardNumber: '',
         brand: '',
+    };
+    public orderProduct:{
+        id:0,
+        productId : 0
+        product: any,
+        orderid: 0,
+        quantity: 0,
+        totalPrice: 0,
+        size: '',
+        color: ''        
     };
     public product = {
         name: '',
@@ -31,7 +42,8 @@ export class CommonService {
         createdDate: '',
         id: 0,
         rejectReason: null,
-        isActive: null
+        isActive: null,
+        orderProduct: this.orderProduct  
     };
     public store = {
         name: '',
@@ -89,16 +101,7 @@ export class CommonService {
         completeDate: new Date(),       
     };
 
-    public orderProduct:{
-        id:0,
-        productId : 0
-        product: any,
-        orderid: 0,
-        quantity: 0,
-        totalPrice: 0,
-        size: '',
-        color: ''        
-    };
+    
     public order = {
         id: 0,
         storeId: '',
@@ -118,7 +121,7 @@ export class CommonService {
         wayBill:'',
         courierName: '',
         courierId:'',
-        transactionId: ''        
+        transactionId: '',              
     };  
 
     // Settings

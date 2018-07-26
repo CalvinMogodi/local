@@ -1,12 +1,70 @@
-<div class="container">
-  <form [formGroup]="registerForm" class="animated wow slideInUp" data-wow-delay=".5s">
-    <div>
+<div class="container animated wow slideInUp" data-wow-delay=".5s">
+  <div class="row">
+    <div class="col-md-2">
       <label class="mylabel">Order Number: </label>
-      <input type="text" [value]="user.name" formControlName="name" (input)="user.name = $event.target.value"
-        name="name" required="required">
-        <div *ngIf="!registerForm.controls.name.valid && (registerForm.controls.name.dirty || submitAttempt)">
-          <small class="red">The field above is required.</small>
-        </div>
+      <input class="my-number-input" type="number" name="orderNumber" [(ngModel)]="orderNumber">
+      <div *ngIf="orderNumberError">
+        <small class="red">The field above is required.</small>
+      </div>
     </div>
-  </form>
+    <div class="col-md-2">
+      <button type="submit" class="btn btn-primary" (click)="search()" style="margin-top: 25px;">Search</button>
+    </div>
+    <div class="col-md-8">
+    </div>
+  </div>
+<br><br>
+
+<div class="row">
+   <div class="col-md-6">
+      <label class="mylabel"><b>Order Number:</b> {{order.id}}</label>
+    </div>
+    <div class="col-md-6">
+      <label class="mylabel"><b>Order Number:</b> {{order.store.Name}}</label>
+    </div>
+     
+  </div>
+  <div class="row">
+   <div class="col-md-6">
+      <label class="mylabel"><b>Pick Up Address:</b>  {{order.pickUpAddress}}</label>
+    </div>
+     <div class="col-md-6">
+      <label class="mylabel"><b>Pick Up Contact Deatils:</b>  {{ order.supplierContactDeatils}}</label>
+    </div>   
+</div>
+<div class="row">
+   <div class="col-md-6">
+      <label class="mylabel"><b>Drop Address:</b>  {{order.dropAddress}}</label>
+    </div>
+    <div class="col-md-6">  
+       <label class="mylabel"><b>Drop Contact Deatils:</b> {{ order.userContactDeatils }}</label>
+    </div>
+</div>
+
+  <div class="row">
+                <table class="table table-striped table-scroll">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>Product Name</th>
+                            <th>quantity</th>
+                            <th>Colors</th>
+                            <th>Sizes</th>                            
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor='let product of order.products; let i = index' style="font-size: 12px;">
+                            <td class="invert-image" style="text-align: center"><img style="height: auto;" src="{{serverImgurl+product.ImageName}}" alt=" " height="60px" width="30px" /></td>
+					                  <td class="invert">{{product.Name}}</td>
+                            <td class="invert">{{product.quantity}}</td>
+                            <td class="invert">{{product.size}}</td>
+                            <td class="invert">{{product.color}}</td>
+                        </tr>
+                        <tr *ngIf='order.products.length == 0'>
+                            <td colspan="9" style="text-align: center;font-weight: bold;">No Product(s) Found</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 </div>

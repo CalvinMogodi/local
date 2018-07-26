@@ -38,6 +38,10 @@ export class OrderProvider {
         return this.http.post(this.url + "/setProductActive", parameters);
     }
 
+    getOrderById(parameters) {
+        return this.http.post(this.url + "/getOrderById", parameters);
+    }
+
     //Payment
     startPayment(parameters) {
         return this.http.post(this.url + "/startPayment", parameters);

@@ -29,7 +29,7 @@ export class HomeComponent {
   public colors = [];
   public sizes = [];
   public cartList = [];
-  public serverImgurl = "http://localhost:7777/";
+  public serverImgurl = this.commonService.serverImgurl;
   public currentUser: any;
   constructor(public productProvider: ProductProvider, public commonService: CommonService) {
     //sessionStorage.setItem('cartList', JSON.stringify(this.cartList));
