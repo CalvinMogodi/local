@@ -118,6 +118,7 @@ export class CommonService {
         userContactDeatils:'',
         orderAudit: this.orderAudit,
         auditId: 0,
+        audit: this.orderAudit,
         wayBill:'',
         courierName: '',
         courierId:'',

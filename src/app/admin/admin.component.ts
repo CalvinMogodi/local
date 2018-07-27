@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductProvider } from '../providers/product';
+import { OrderProvider } from '../providers/order';
 import { CommonService } from '../shared/common';
 
 @Component({
@@ -10,11 +11,12 @@ import { CommonService } from '../shared/common';
 export class AdminComponent implements OnInit {
   public products = [];
   public product = this.commonService.product;
+  public orders = [];
   public index = -1;
   public showReasonError = false;
   public selectedButton = 3;
   public serverImgurl = "http://localhost:7777/";
-  constructor(public productProvider: ProductProvider, public commonService: CommonService) { 
+  constructor(public productProvider: ProductProvider, public commonService: CommonService, public orderProvider: OrderProvider) { 
 
   }
 
@@ -29,6 +31,22 @@ export class AdminComponent implements OnInit {
         return s - f;
       })
     });
+
+    let element: HTMLElement = document.getElementById('approveProduct') as HTMLElement;
+    element.click();
+
+    this.orderProvider.getOrdersToAssginToCourier().subscribe((response: any) => {
+      this.orders = response;
+      this.orders.sort(function (a, b) {
+        let f = Date.parse(b.CreatedDate);
+        let s = Date.parse(a.CreatedDate);
+        f = f / 1000;
+        s = s / 1000;
+        return s - f;
+      })
+    });
+
+    
   }
 
   viewProduct(product, index){

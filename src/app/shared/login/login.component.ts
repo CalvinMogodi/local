@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UserProvider } from '../../providers/user'; 
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { StoreProvider } from '../../providers/store';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginComponent {
     password: '',
   }
 
-  constructor(public formBuilder: FormBuilder, public userProvider: UserProvider, public router: Router) {
+  constructor(public formBuilder: FormBuilder, public userProvider: UserProvider, public router: Router, public storeProvider: StoreProvider) {
     this.loginForm = formBuilder.group({
       password: [this.user.password, Validators.compose([Validators.required])],
       username: [this.user.username, Validators.compose([Validators.required])]
@@ -35,7 +36,12 @@ export class LoginComponent {
           element.click();
           sessionStorage.setItem('currentUser', JSON.stringify(response.data));
           if(response.data.UserType == 'Supplier'){ 
-            this.router.navigate(['store']);            
+             this.storeProvider.getStoreByUserId({userId: response.data.Id }).subscribe((storeResponse: any) => {
+              if(storeResponse != null){
+                sessionStorage.setItem('currentStore', JSON.stringify(storeResponse));
+              }
+              this.router.navigate(['store']);     
+             });
           }else{
             this.router.navigate(['product']);  
           }

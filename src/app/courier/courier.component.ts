@@ -14,6 +14,8 @@ export class CourierComponent implements OnInit {
   public order = this.commonService.order;
   public storeForm: FormGroup;
   public orderNumberError: boolean = false;
+  public orderHasData = false;
+  public searchStarted = false;
   public serverImgurl = this.commonService.serverImgurl;
   constructor(public formBuilder: FormBuilder, public orderProvider: OrderProvider, public router: Router, public commonService: CommonService) {}
 
@@ -22,15 +24,23 @@ export class CourierComponent implements OnInit {
   }
 
   search(){
-
-   // this.orderHasData = false;
+   this.searchStarted = true;
+   this.orderHasData = false;
     if(this.orderNumber == undefined || this.orderNumber == 0){
       this.orderNumberError = true;
       return false
     }
 
     this.orderProvider.getOrderById({id: this.orderNumber}).subscribe((response: any) => {
-      this.order = response;
+      if(response){
+        this.order = response;
+          this.orderHasData = true;
+      }
+      else
+      {
+          this.orderHasData = false;
+      }
+      
     });      
   }
 

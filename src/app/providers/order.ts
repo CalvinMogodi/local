@@ -22,10 +22,6 @@ export class OrderProvider {
         return this.http.post(this.url + "/getOrdersByUserId", parameters);
     }
 
-    getOrdersByStoreId(parameters) {
-        return this.http.post(this.url + "/getOrdersByStoreId", parameters);
-    }
-
     addOrderProduct(parameters) {
         return this.http.post(this.url + "/insertOrderProduct", parameters);
     }
@@ -41,6 +37,16 @@ export class OrderProvider {
     getOrderById(parameters) {
         return this.http.post(this.url + "/getOrderById", parameters);
     }
+
+    getOrdersToAssginToCourier() {
+        return this.http.get(this.url + "/getOrdersToAssginToCourier");
+    }
+
+    getOrdersByStoreId(parameters) {
+        return this.http.post(this.url + "/getOrdersByStoreId", parameters);
+    }
+
+    
 
     //Payment
     startPayment(parameters) {

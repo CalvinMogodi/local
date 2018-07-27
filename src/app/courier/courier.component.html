@@ -13,58 +13,75 @@
     <div class="col-md-8">
     </div>
   </div>
-<br><br>
+  <br><br>
 
-<div class="row">
-   <div class="col-md-6">
-      <label class="mylabel"><b>Order Number:</b> {{order.id}}</label>
+  <div *ngIf="searchStarted && orderHasData">
+    <div class="row">
+      <div class="col-md-4">
+        <label class="mylabel" style="color: #999;"><b>Order Number:</b> {{order.id}}</label>
+      </div>
+      <div class="col-md-4">
+        <label class="mylabel" style="color: #999;"><b>Pick Up Address:</b>  {{order.pickUpAddress}}</label>
+      </div>
+      <div class="col-md-4">
+        <label class="mylabel" style="color: #999;"><b>Drop Address:</b>  {{order.dropAddress}}</label>
+      </div>
     </div>
-    <div class="col-md-6">
-      <label class="mylabel"><b>Order Number:</b> {{order.store.Name}}</label>
+    <div class="row">
+      <div class="col-md-4">
+        <label class="mylabel" style="color: #999;"><b>Store Name:</b> {{order.store.Name}}</label>
+      </div>
+      <div class="col-md-4">
+        <label class="mylabel" style="color: #999;"><b>Pick Up Contact Deatils:</b>  {{ order.supplierContactDeatils}}</label>
+      </div>
+      <div class="col-md-4">
+        <label class="mylabel" style="color: #999;"><b>Drop Contact Deatils:</b> {{ order.userContactDeatils }}</label>
+      </div>
     </div>
-     
-  </div>
-  <div class="row">
-   <div class="col-md-6">
-      <label class="mylabel"><b>Pick Up Address:</b>  {{order.pickUpAddress}}</label>
-    </div>
-     <div class="col-md-6">
-      <label class="mylabel"><b>Pick Up Contact Deatils:</b>  {{ order.supplierContactDeatils}}</label>
+    <div class="row">
+      <table class="table table-striped table-scroll">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Product Name</th>
+            <th>quantity</th>
+            <th>Colors</th>
+            <th>Sizes</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr  [hidden]='order.audit.waitingForCourier == null' *ngFor='let product of order.products; let i = index' style="font-size: 12px;">
+            <td class="invert-image" style="text-align: center"><img style="height: auto;" src="{{serverImgurl+product.ImageName}}" alt=" " height="60px" width="30px" /></td>
+            <td class="invert">{{product.Name}}</td>
+            <td class="invert">{{product.quantity}}</td>
+            <td class="invert">{{product.size}}</td>
+            <td class="invert">{{product.color}}</td>
+          </tr>
+          <tr *ngIf='order.audit.waitingForCourier == null'>
+            <td colspan="5" style="text-align: center;font-weight: bold;">This Order is Not Ready For Collection</td>
+          </tr>
+          <tr *ngIf='order.audit.complete'>
+            <td colspan="5" style="text-align: center;font-weight: bold;">This Order is Already Delivered</td>
+          </tr>
+        </tbody>
+      </table>
     </div>   
-</div>
-<div class="row">
-   <div class="col-md-6">
-      <label class="mylabel"><b>Drop Address:</b>  {{order.dropAddress}}</label>
-    </div>
-    <div class="col-md-6">  
-       <label class="mylabel"><b>Drop Contact Deatils:</b> {{ order.userContactDeatils }}</label>
-    </div>
-</div>
+  </div>
 
-  <div class="row">
-                <table class="table table-striped table-scroll">
-                    <thead>
-                        <tr>
-                            <th>Image</th>
-                            <th>Product Name</th>
-                            <th>quantity</th>
-                            <th>Colors</th>
-                            <th>Sizes</th>                            
-                            
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor='let product of order.products; let i = index' style="font-size: 12px;">
-                            <td class="invert-image" style="text-align: center"><img style="height: auto;" src="{{serverImgurl+product.ImageName}}" alt=" " height="60px" width="30px" /></td>
-					                  <td class="invert">{{product.Name}}</td>
-                            <td class="invert">{{product.quantity}}</td>
-                            <td class="invert">{{product.size}}</td>
-                            <td class="invert">{{product.color}}</td>
-                        </tr>
-                        <tr *ngIf='order.products.length == 0'>
-                            <td colspan="9" style="text-align: center;font-weight: bold;">No Product(s) Found</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
+   <div class="row" *ngIf="searchStarted && !orderHasData" style="text-align: center;color: #999;">
+      <div>
+        <label style="text-align: center;font-weight: bold;">No Product(s) Found</label>
+      </div>
+    </div>
+
+  <div class="row" style="float: right" *ngIf="order.audit.waitingForCourier && order.audit.withCourier == null">
+    <button type="submit" class="btn btn-primary" (click)="confirmPickUp()" style="margin-top: 25px;">Confirm Pick Up</button>
+  </div>
+
+   <div class="row" style="float: right" *ngIf="order.audit.withCourier && order.audit.complete == null">
+    <button type="submit" class="btn btn-primary" (click)="confirmDrop()" style="margin-top: 25px;">Confirm Drop</button>
+  </div>
+
 </div>
+<br><br>
