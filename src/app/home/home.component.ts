@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { ProductProvider } from '../providers/product';
 import { CommonService } from '../shared/common';
+import { AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireStorage } from 'angularfire2/storage';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -9,6 +12,8 @@ import { CommonService } from '../shared/common';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+  itemValue = '';
+  items: Observable<any[]>;
   title = 'app';
   public products = [];
   public selectedImage = '';
@@ -31,9 +36,10 @@ export class HomeComponent {
   public cartList = [];
   public serverImgurl = this.commonService.serverImgurl;
   public currentUser: any;
-  constructor(public productProvider: ProductProvider, public commonService: CommonService) {
+  constructor(public productProvider: ProductProvider, public commonService: CommonService, public db: AngularFireDatabase, public dbStorage: AngularFireStorage) {
     //sessionStorage.setItem('cartList', JSON.stringify(this.cartList));
     this.currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
+    this.items = db.list('products').valueChanges();
     this.productProvider.getSpecialDeals().subscribe((response: any) => {
       this.products = response;
       this.products.sort(function (a, b) {

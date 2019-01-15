@@ -29,6 +29,12 @@ import { OrderProvider } from './providers/order';
 import { CourierComponent } from './courier/courier.component';
 import { OrderComponent } from './order/order.component';
 import { AdminComponent } from './admin/admin.component';
+import { environment } from '../environments/environment';
+
+import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireStorageModule } from 'angularfire2/storage';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
 @NgModule({
   declarations: [
@@ -55,7 +61,11 @@ import { AdminComponent } from './admin/admin.component';
     HttpClientModule,
     ReactiveFormsModule,
     NgbModule.forRoot(),
-    NgMultiSelectDropDownModule.forRoot()
+    NgMultiSelectDropDownModule.forRoot(),
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFireStorageModule, // imports firebase/firestore, only needed for database features
+    AngularFireAuthModule, // imports firebase/auth, only needed for auth features
   ],
   providers: [
     CommonService,
